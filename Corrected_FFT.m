@@ -21,8 +21,8 @@ NumberOfBins = 4096;
 fprintf("The number of bins used in the fft is: %f \n This results in the following resolution: %f\n",NumberOfBins,fs/NumberOfBins);
 x_segment_windowed=x_segment.*flattopwin(length(x_segment)); % apply windowing & convert to Vrms
 
-p=(1/NumberOfBins)*fftshift(fft(x_segment_windowed/2,NumberOfBins)); %find FFT of IQ data
-
+p=(1/NumberOfBins)*fftshift(fft(x_segment_windowed/2,NumberOfBins)) %find FFT of IQ data
+%p_dBm=abs(p)
 p_dBm = 10*log10((abs(p)/2).^2/50*0.001);                           %Circuit is matched to 50 ohms
 
 Processing_Gain= 10*log10(NumberOfBins/2);
