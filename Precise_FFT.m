@@ -35,7 +35,7 @@ Result_FFT = Result_FFT / sqrt(2);
 %go to power (not in db yet)
 
 Result_FFT = Result_FFT.^2;
-FFT_power = Result_FFT
+FFT_power = Result_FFT;
 
 
 
@@ -46,22 +46,22 @@ FFT_dBm = 10*log10(Result_FFT/50*0.001);
 
 
 %plot in db
-Low_freq=(f0-fs/2);                                          %lowest frequency to plot
-High_freq=(f0+fs/2);                                         %highest frequency to plot
-freq=[0:1:NumberOfBins-1]*(fs)/NumberOfBins+Low_freq;
-plot(freq,FFT_dBm);
-axis tight
-xlabel('Freqency [Hz]','FontSize', 14)
-ylabel('dBm)','FontSize', 14)
-grid on
-set(gcf,'color','white');
-%plot vrms 
-figure;
-plot(freq,Result_FFT);
-axis tight
-xlabel('Freqency [Hz]','FontSize', 14)
-ylabel('w','FontSize', 14)
-grid on
-set(gcf,'color','white');
+% Low_freq=(f0-fs/2);                                          %lowest frequency to plot
+% High_freq=(f0+fs/2);                                         %highest frequency to plot
+% freq=[0:1:NumberOfBins-1]*(fs)/NumberOfBins+Low_freq;
+% plot(freq,FFT_dBm);
+% axis tight
+% xlabel('Freqency [Hz]','FontSize', 14)
+% ylabel('dBm)','FontSize', 14)
+% grid on
+% set(gcf,'color','white');
+% %plot vrms 
+% figure;
+% plot(freq,Result_FFT);
+% axis tight
+% xlabel('Freqency [Hz]','FontSize', 14)
+% ylabel('w','FontSize', 14)
+% grid on
+% set(gcf,'color','white');
 end
 
