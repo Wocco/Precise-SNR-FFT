@@ -1,9 +1,9 @@
 function [noise_level_dBm, signal_level_dBm,snr,CN0] = SNR_V2(fft,fs,center_freq,low_freq,high_freq)
-%SNR_V2 Summary of this function goes here
+%SNR_V2 Calculates the SNR of a signal
 %   Detailed explanation goes here
 
-binsizefft = fs/length(fft)
-lowest_bin_freq=center_freq-fs/2
+binsizefft = fs/length(fft);
+lowest_bin_freq=center_freq-fs/2;
 
 
 lowest_bin_to_search = floor((low_freq-lowest_bin_freq)/binsizefft);
