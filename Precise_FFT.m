@@ -21,7 +21,6 @@ x_segment = x(n0:(n0+nf-1));                                   %extracts a small
 N = length(x_segment);                                         %find the number of bins
 NumberOfBins = 10000;
 resolution = fs/NumberOfBins;
-fprintf("The number of bins used in the fft is: %f \n This results in the following resolution: %f\n",NumberOfBins,resolution);
 
 
 %Compute the FFT
