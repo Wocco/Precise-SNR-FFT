@@ -25,22 +25,22 @@ resolution = fs/NumberOfBins;
 
 %Compute the FFT
 
-Result_FFT = (1/N) * abs(fftshift(fft(x_segment,NumberOfBins)));
+Result_FFT = abs(fftshift(fft(x_segment,NumberOfBins)));
  
 %go to RMS
 
-Result_FFT = Result_FFT / sqrt(2);
+Result_FFT = 1/N^2*Result_FFT.^2;
 
 %go to power (not in db yet)
 
-Result_FFT = Result_FFT.^2;
+
 FFT_power = Result_FFT;
 
 
 
 
 %convert to dbm, 50 ohms load because the circuit is matched to 50ohms
-FFT_dBm = 10*log10(Result_FFT/50*0.001);
+FFT_dBm = 10*log10(FFT_power/50/0.001);
 
 
 

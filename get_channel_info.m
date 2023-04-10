@@ -1,7 +1,14 @@
 function [ORBCOMM,low_freq,high_freq,channel] = get_channel_info(frequency)
-% Gives the channel number of a frequency and it's respective high and low frequency
-%   
-    
+% Gives the channel number of a frequency and it's respective high and low
+% frequency, also checks if the channel is a ORBCOMM channel doesn't take
+% into account doppler shift
+%   Input:
+%   frequency -> the frequency of the to be checked ORBCOMM channel
+%   Output:
+%   ORBCOMM -> boolean which is true if it is a ORBCOMM channel
+%   low_freq -> The lower bound of the respective channel
+%   high_freq -> The upper bound of the respective channel
+%   channel -> The channel number between 80 and 320
 
     dif = frequency-137E6;
     N = floor(dif/0.0025E6);
