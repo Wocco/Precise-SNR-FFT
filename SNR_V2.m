@@ -28,6 +28,7 @@ highest_bin_to_search = ceil((high_freq-lowest_bin_freq)/binsizefft);
 sorted_fft=sort(fft);
 relevant_bins_for_noise = sorted_fft(1:floor(length(sorted_fft)-length(sorted_fft)*2*Nofsat*0.0025));
 noise_level= mean(relevant_bins_for_noise);
+
 n0 = noise_level/100;
 
 [~,index] = max(fft(lowest_bin_to_search:highest_bin_to_search));
@@ -37,17 +38,16 @@ totalvalue=0;
 for i=-13:12
     totalvalue=totalvalue+fft(index+i);
 end
+noise_in_box = noise_level*25;
 
-noise_in_box=noise_level*25;
-
-noise_level_dBm=10*log10(noise_in_box/50/0.001); %calculate noise in db that is present in channel
-signal_level_dBm=10*log10(totalvalue/50/0.001); %calculate total power present in channel;
+noise_level_dBm = 10*log10(noise_in_box/50/0.001); %calculate noise in db that is present in channel
+signal_level_dBm = 10*log10(totalvalue/50/0.001); %calculate total power present in channel;
 
 snr = signal_level_dBm-noise_level_dBm;
-snr2 = 10*log10((totalvalue/noise_in_box)/50/0.001);
-CN0 = (totalvalue/noise_in_box)*2500;
-CN0 = 10*log10(CN0/50/0.001);
-%CN0 = snr + 10*log10(25*binsizefft);
+%snr2 = 10*log10((totalvalue/noise_in_box)/50/0.001);
+%CN0 = (totalvalue/noise_in_box)*2500;
+%CN0 = 10*log10(CN0/50);
+CN0 = snr + 10*log10(25*binsizefft);
 
 end
 

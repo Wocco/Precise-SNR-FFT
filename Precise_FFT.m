@@ -29,7 +29,7 @@ Result_FFT = abs(fftshift(fft(x_segment,NumberOfBins)));
  
 %go to RMS
 
-Result_FFT = 1/N^2*Result_FFT.^2;
+Result_FFT = 1/N*Result_FFT.^2;
 
 %go to power (not in db yet)
 
