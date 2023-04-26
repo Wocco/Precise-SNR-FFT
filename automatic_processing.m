@@ -13,16 +13,17 @@ sampleRate= info.SampleRate;
 RecordingTime = info.TotalSamples/sampleRate;
 get_channel_info((SearchLowFreq+SearchHighFreq)/2); %give info about if this is an ORBCOMM channel
 
-
 for i = 0:1:floor(RecordingTime-1)
      if i==0
          SDR=audioread(filename,[1,1*sampleRate]);
          IQData = (SDR(:,1)+1i*SDR(:,2)); %Get the IQ data from the columns and put them togheter as a complex value
+         IQData= IQData.*blackman(sampleRate);
          [fft_power, fft_dBm] = Precise_FFT_plot(IQData,1,sampleRate,sampleRate,center_freq);
          [noise_level_dBm(i+1),signal_level_dBm(i+1),snr(i+1), CN0(i+1),peakBin(i+1)] = SNR_V2(fft_power,sampleRate,center_freq,SearchLowFreq,SearchHighFreq,numberOfSatsInView);
      else
          SDR=audioread(filename,[i*sampleRate,(i+1)*sampleRate]);
          IQData = (SDR(:,1)+1i*SDR(:,2)); %Get the IQ data from the columns and put them togheter as a complex value
+         IQData= IQData.*blackman(sampleRate+1);
          [fft_power, fft_dBm] = Precise_FFT(IQData,1,sampleRate,sampleRate,center_freq);
          [noise_level_dBm(i+1),signal_level_dBm(i+1),snr(i+1), CN0(i+1),peakBin(i+1)] = SNR_V2(fft_power,sampleRate,center_freq,SearchLowFreq,SearchHighFreq,numberOfSatsInView);
      end
